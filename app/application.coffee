@@ -8,15 +8,15 @@ Application =
         HomeView = require 'views/home_view'
         Router = require 'lib/router'
 
-        Routes = require 'models/route_collection'
-        RouteListView = require 'views/route_list_view'
+        Stops = require 'models/stop_collection'
+        StopListView = require 'views/stop_list_view'
 
         # Ideally, initialized classes should be kept in controllers & mediator.
         # If you're making big webapp, here's more sophisticated skeleton
         # https://github.com/paulmillr/brunch-with-chaplin
         @views.home = new HomeView
-        @collections.routes = new Routes
-        @views.routes = new RouteListView { collection: @collections.routes }
+        @collections.stops = new Stops 
+        @views.stops = new StopListView { collection: @collections.stops }
 
         @obtainLocation()
 
@@ -28,6 +28,6 @@ Application =
     obtainLocation: ->
         navigator.geolocation.getCurrentPosition (position) =>
             { latitude, longitude } = position.coords
-            @collections.routes.fetch { data: { latitude: latitude, longitude: longitude }}
+            @collections.stops.fetch { data: { latitude: latitude, longitude: longitude }}
 
 module.exports = Application
