@@ -22,6 +22,7 @@ Application =
 
         # Instantiate the router
         @router = new Router
+
         # Freeze the object
         Object.freeze? this
     

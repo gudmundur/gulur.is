@@ -2,4 +2,4 @@ application = require 'application'
 
 $ ->
   application.initialize()
-  Backbone.history.start({ pushState: true })
+  Backbone.history.start()
