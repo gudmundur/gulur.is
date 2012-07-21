@@ -5,30 +5,20 @@ Application =
     views: {}
 
     initialize: ->
-        HomeView = require 'views/home_view'
-        Router = require 'lib/router'
+        StopsNearView = require 'views/stops/near'
 
         Stops = require 'models/stop_collection'
         StopListView = require 'views/stop_list_view'
 
-        # Ideally, initialized classes should be kept in controllers & mediator.
-        # If you're making big webapp, here's more sophisticated skeleton
-        # https://github.com/paulmillr/brunch-with-chaplin
-        @views.home = new HomeView
+        @views.near = new StopsNearView
         @collections.stops = new Stops 
         @views.stops = new StopListView { collection: @collections.stops }
 
-        @obtainLocation()
-
         # Instantiate the router
+        Router = require 'lib/router'
         @router = new Router
 
         # Freeze the object
         Object.freeze? this
     
-    obtainLocation: ->
-        navigator.geolocation.getCurrentPosition (position) =>
-            { latitude, longitude } = position.coords
-            @collections.stops.fetch { data: { latitude: latitude, longitude: longitude }}
-
 module.exports = Application
