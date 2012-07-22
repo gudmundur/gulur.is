@@ -1,19 +1,26 @@
-application = require 'application'
-
 module.exports = class Router extends Backbone.Router
     routes:
         '': 'home'
         'stops/:stopId': 'stops'
 
     home: ->
-        $('body').html application.views.near.render().el
+        StopsNearView = require 'views/stops/near'
+        Stops = require 'models/stop_collection'
+        StopListView = require 'views/stop_list_view'
+
+        near = new StopsNearView
+        stops = new Stops
+        new StopListView { collection: stops }
+
+        $('body').html near.render().el
 
         # TODO Move into a model that emit events
         # TODO If at "default" location, report position not found
         #   default: lat = 64.13533799999999, lng = -21.89521
         navigator.geolocation.getCurrentPosition (position) =>
+            console.log position
             { latitude, longitude } = position.coords
-            application.collections.stops.fetch { data: { latitude: latitude, longitude: longitude }}
+            stops.fetch { data: { latitude: latitude, longitude: longitude }}
 
     stops: (stopId) ->
         StopTimesView = require 'views/stops/times'
