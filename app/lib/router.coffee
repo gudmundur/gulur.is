@@ -17,10 +17,15 @@ module.exports = class Router extends Backbone.Router
         # TODO Move into a model that emit events
         # TODO If at "default" location, report position not found
         #   default: lat = 64.13533799999999, lng = -21.89521
-        navigator.geolocation.getCurrentPosition (position) =>
+        success = (position) =>
             console.log position
             { latitude, longitude } = position.coords
             stops.fetch { data: { latitude: latitude, longitude: longitude }}
+
+        failure = (err) =>
+            console.log err
+
+        navigator.geolocation.getCurrentPosition success, failure
 
     stops: (stopId) ->
         StopTimesView = require 'views/stops/times'
