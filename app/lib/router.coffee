@@ -23,6 +23,7 @@ module.exports = class Router extends Backbone.Router
             stops.fetch { data: { latitude: latitude, longitude: longitude }}
 
         failure = (err) =>
+            console.log 'error callback'
             console.log err
 
         navigator.geolocation.getCurrentPosition success, failure
