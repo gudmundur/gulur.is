@@ -2,6 +2,7 @@ module.exports = class Router extends Backbone.Router
     routes:
         '': 'home'
         'stops/:stopId': 'stops'
+        'lost': 'lost'
 
     home: ->
         StopsNearView = require 'views/stops/near'
@@ -23,10 +24,13 @@ module.exports = class Router extends Backbone.Router
             stops.fetch { data: { latitude: latitude, longitude: longitude }}
 
         failure = (err) =>
-            console.log 'error callback'
             console.log err
+            @navigate 'lost', { trigger: true }
 
-        navigator.geolocation.getCurrentPosition success, failure
+        if Modernizr.geolocation
+            navigator.geolocation.getCurrentPosition success, failure, {maximumAge:60000, timeout:5000}
+        else
+            failure new Error 'No geolocation support'
 
     stops: (stopId) ->
         StopTimesView = require 'views/stops/times'
@@ -35,3 +39,7 @@ module.exports = class Router extends Backbone.Router
         stopTimes = new RoutesTimes { id: stopId }
         stopTimes.fetch
             success: (data) -> $('body').html (new StopTimesView { collection: data }).render().el
+
+    lost: ->
+        NoLocationView = require 'views/no_location'
+        ($ 'body').html (new NoLocationView).render().el
