@@ -4,6 +4,9 @@ module.exports = class Router extends Backbone.Router
         'stops/:stopId': 'stops'
         'lost': 'lost'
 
+    initialize: ->
+        @bind 'all', @_trackPageview
+
     home: ->
         StopsNearView = require 'views/stops/near'
         Stops = require 'models/stop_collection'
@@ -43,3 +46,7 @@ module.exports = class Router extends Backbone.Router
     lost: ->
         NoLocationView = require 'views/no_location'
         ($ 'body').html (new NoLocationView).render().el
+
+    _trackPageview: ->
+        url = Backbone.history.getFragment()
+        _gaq.push(['_trackPageview', "/#{url}"])
