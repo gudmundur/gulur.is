@@ -31,7 +31,7 @@ module.exports = class Router extends Backbone.Router
             @navigate 'lost', { trigger: true }
 
         if Modernizr.geolocation
-            navigator.geolocation.getCurrentPosition success, failure, {maximumAge:60000, timeout:5000}
+            navigator.geolocation.getCurrentPosition success, failure, {maximumAge: 60000, enableHighAccuracy: true}
         else
             failure new Error 'No geolocation support'
 
