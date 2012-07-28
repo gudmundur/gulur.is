@@ -2,6 +2,7 @@ module.exports = class Router extends Backbone.Router
     routes:
         '': 'home'
         'stops/:stopId': 'stops'
+        'busses': 'busses'
         'lost': 'lost'
 
     initialize: ->
@@ -42,6 +43,28 @@ module.exports = class Router extends Backbone.Router
         stopTimes = new RoutesTimes { id: stopId }
         stopTimes.fetch
             success: (data) -> $('body').html (new StopTimesView { collection: data }).render().el
+
+    busses: ->
+        Busses = require 'models/busses_collection'
+        BussesView = require 'views/busses'
+        busses = new Busses
+        view = new BussesView { collection: busses }
+
+        view.on 'rendered', -> ($ 'body').html view.el
+
+        success = (position) =>
+            console.log position
+            { latitude, longitude } = position.coords
+            busses.fetch { data: { latitude: latitude, longitude: longitude }}
+
+        failure = (err) =>
+            console.log err
+            @navigate 'lost', { trigger: true }
+
+        if Modernizr.geolocation
+            navigator.geolocation.getCurrentPosition success, failure, {maximumAge: 60000, enableHighAccuracy: true}
+        else
+            failure new Error 'No geolocation support'
 
     lost: ->
         NoLocationView = require 'views/no_location'
