@@ -12,7 +12,6 @@ module.exports = class Router extends Backbone.Router
         @location = new Location
         @location.on 'error', (error) =>
             @navigate 'lost', { trigger: true }
-        @location.start()
 
     home: ->
         StopsNearView = require 'views/stops/near'
@@ -26,8 +25,9 @@ module.exports = class Router extends Backbone.Router
         $('body').html near.render().el
         slv.on 'rendered', -> ($ '#stops').html slv.el
 
-        @location.on 'change', (location) -> stops.fetch { data: location.toJSON() }
-
+        @location.off()
+        @location.on 'reset', (location) -> stops.fetch { data: location.toJSON() }
+        @location.fetch()
 
     stops: (stopId) ->
         StopTimesView = require 'views/stops/times'
@@ -44,8 +44,11 @@ module.exports = class Router extends Backbone.Router
         busses = new Busses
         view = new BussesView { collection: busses }
 
-        @location.on 'change', (location) -> busses.fetch { data: location.toJSON() }
+        @location.off()
+        @location.on 'reset', (location) -> busses.fetch { data: location.toJSON() }
         view.on 'rendered', -> ($ 'body').html view.el
+
+        @location.fetch()
 
     lost: ->
         NoLocationView = require 'views/no_location'

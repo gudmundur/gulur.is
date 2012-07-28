@@ -3,7 +3,7 @@ Model = require './model'
 module.exports = class Location extends Model
     initialize: ->
 
-    start: ->
+    fetch: ->
         if Modernizr.geolocation
             # TODO If at "default" location, report position not found
             #   default: lat = 64.13533799999999, lng = -21.89521
@@ -15,6 +15,10 @@ module.exports = class Location extends Model
         @set
             latitude: position.coords.latitude
             longitude: position.coords.longitude
+            accuracy: position.coords.accuracy
+            timestamp: position.timestamp
+
+        @trigger 'reset', @
 
     failure: (error) ->
         @trigger 'error', error
