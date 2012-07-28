@@ -1,3 +1,5 @@
+Location = require 'models/location'
+
 module.exports = class Router extends Backbone.Router
     routes:
         '': 'home'
@@ -7,6 +9,10 @@ module.exports = class Router extends Backbone.Router
 
     initialize: ->
         @bind 'all', @_trackPageview
+        @location = new Location
+        @location.on 'error', (error) =>
+            @navigate 'lost', { trigger: true }
+        @location.start()
 
     home: ->
         StopsNearView = require 'views/stops/near'
@@ -15,26 +21,13 @@ module.exports = class Router extends Backbone.Router
 
         near = new StopsNearView
         stops = new Stops
-        new StopListView { collection: stops }
+        slv = new StopListView { collection: stops }
 
         $('body').html near.render().el
+        slv.on 'rendered', -> ($ '#stops').html slv.el
 
-        # TODO Move into a model that emit events
-        # TODO If at "default" location, report position not found
-        #   default: lat = 64.13533799999999, lng = -21.89521
-        success = (position) =>
-            console.log position
-            { latitude, longitude } = position.coords
-            stops.fetch { data: { latitude: latitude, longitude: longitude }}
+        @location.on 'change', (location) -> stops.fetch { data: location.toJSON() }
 
-        failure = (err) =>
-            console.log err
-            @navigate 'lost', { trigger: true }
-
-        if Modernizr.geolocation
-            navigator.geolocation.getCurrentPosition success, failure, {maximumAge: 60000, enableHighAccuracy: true}
-        else
-            failure new Error 'No geolocation support'
 
     stops: (stopId) ->
         StopTimesView = require 'views/stops/times'
@@ -47,24 +40,12 @@ module.exports = class Router extends Backbone.Router
     busses: ->
         Busses = require 'models/busses_collection'
         BussesView = require 'views/busses'
+
         busses = new Busses
         view = new BussesView { collection: busses }
 
+        @location.on 'change', (location) -> busses.fetch { data: location.toJSON() }
         view.on 'rendered', -> ($ 'body').html view.el
-
-        success = (position) =>
-            console.log position
-            { latitude, longitude } = position.coords
-            busses.fetch { data: { latitude: latitude, longitude: longitude }}
-
-        failure = (err) =>
-            console.log err
-            @navigate 'lost', { trigger: true }
-
-        if Modernizr.geolocation
-            navigator.geolocation.getCurrentPosition success, failure, {maximumAge: 60000, enableHighAccuracy: true}
-        else
-            failure new Error 'No geolocation support'
 
     lost: ->
         NoLocationView = require 'views/no_location'

@@ -7,7 +7,6 @@ class BusView extends View
     getRenderData: -> @model.toJSON()
 
 class BussesView extends Backbone.View
-    id: 'busses'
     tagName: 'ul'
 
     initialize: ->
@@ -15,11 +14,8 @@ class BussesView extends Backbone.View
 
     render: =>
         @$el.empty()
-        @collection.each (bus) => 
-            bv = 
-            @$el.append (new BusView { model: bus }).render().el
-        ($ "#busses").html @el
-
+        @collection.each (bus) => @$el.append (new BusView { model: bus }).render().el
         @trigger 'rendered', @
+        @ 
 
 module.exports = BussesView
