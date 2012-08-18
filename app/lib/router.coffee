@@ -36,6 +36,8 @@ module.exports = class Router extends Backbone.Router
         stopTimes = new RoutesTimes { id: stopId }
         stopTimes.fetch
             success: (data) -> $('body').html (new StopTimesView { collection: data }).render().el
+            data:
+                range: 'now'
 
     busses: ->
         Busses = require 'models/busses_collection'
@@ -45,7 +47,14 @@ module.exports = class Router extends Backbone.Router
         view = new BussesView { collection: busses }
 
         @location.off()
-        @location.on 'reset', (location) -> busses.fetch { data: location.toJSON() }
+        @location.on 'reset', (location) ->
+            busses.fetch
+                data:
+                    latitude: location.get 'latitude'
+                    longitude: location.get 'longitude'
+                    accuracy: location.get 'accuracy'
+                    range: 'now'
+
         view.on 'rendered', -> ($ 'body').html view.el
 
         @location.fetch()
