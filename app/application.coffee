@@ -1,11 +1,11 @@
 Chaplin = require 'chaplin'
 mediator = require 'mediator'
 routes = require 'routes'
-LocationController = require 'controllers/location_controller'
-HeaderController = require 'controllers/header_controller'
+
 Layout = require 'views/layout'
 
-# The application object
+LocationController = require 'controllers/location_controller'
+
 module.exports = class Application extends Chaplin.Application
   # Set your application name here so the document title is set to
   # “Controller title – Site title” (see Layout#adjustTitle)
@@ -50,7 +50,6 @@ module.exports = class Application extends Chaplin.Application
     # or navigation views.
     # e.g. new NavigationController()
     new LocationController()
-    new HeaderController()
 
   # Create additional mediator properties
   # -------------------------------------
