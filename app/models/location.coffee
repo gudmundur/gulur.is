@@ -1,4 +1,5 @@
 Model = require 'models/base/model'
+mediator = require 'mediator'
 
 module.exports = class Location extends Model
     fetch: ->
@@ -16,9 +17,7 @@ module.exports = class Location extends Model
             accuracy: position.coords.accuracy
             timestamp: position.timestamp
         
-        console.log @
-
-        @trigger 'reset', @
+        mediator.publish 'location', @
 
     failure: (error) ->
         @trigger 'error', error
