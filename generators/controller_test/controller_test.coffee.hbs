@@ -1,7 +1,7 @@
-{{#camelize}}{{name}}{{/camelize}} = require 'models/{{name}}'
+{{#camelize}}{{name}}{{/camelize}}Controller = require 'controllers/{{name}}_controller'
 
-describe '{{#camelize}}{{name}}{{/camelize}}', ->
+describe '{{#camelize}}{{name}}{{/camelize}}Controller', ->
     beforeEach ->
-        @model = new {{#camelize}}{{name}}{{/camelize}}()
+        @controller = new {{#camelize}}{{name}}{{/camelize}}Controller
     afterEach ->
-        @model.dispose()
+        @controller.dispose()
