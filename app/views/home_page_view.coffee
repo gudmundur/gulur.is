@@ -13,9 +13,9 @@ module.exports = class HomePageView extends PageView
     initialize: ->
         super
 
-        stops = new Stops
-
         mediator.location.done (location) ->
+            stops = new Stops
+
             (stops.fetch data: (_.defaults location.toJSON(), range: 'now')).done =>
                 new StopsView
                     collection: stops
