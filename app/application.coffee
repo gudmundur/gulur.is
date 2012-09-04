@@ -4,6 +4,7 @@ routes = require 'routes'
 
 Layout = require 'views/layout'
 
+AnalyticsController = require 'controllers/analytics_controller'
 LocationController = require 'controllers/location_controller'
 
 module.exports = class Application extends Chaplin.Application
@@ -23,7 +24,7 @@ module.exports = class Application extends Chaplin.Application
     @initControllers()
 
     # Register all routes and start routing
-    @initRouter routes
+    @initRouter routes, pushState: false
     # You might pass Router/History options as the second parameter.
     # Chaplin enables pushState per default and Backbone uses / as
     # the root per default. You might change that in the options
@@ -49,7 +50,8 @@ module.exports = class Application extends Chaplin.Application
     # and views which are needed the whole time, for example header, footer
     # or navigation views.
     # e.g. new NavigationController()
-    new LocationController()
+    new AnalyticsController
+    new LocationController
 
   # Create additional mediator properties
   # -------------------------------------
