@@ -8,4 +8,4 @@ module.exports = class StopsController extends Controller
 
     show: (params) ->
         # TODO Show a single stop
-        console.log params
+        #console.log params
