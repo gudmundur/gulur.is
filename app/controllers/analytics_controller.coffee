@@ -1,6 +1,6 @@
 Controller = require 'controllers/base/controller'
 
-config = require 'config'
+config = require('config')()
 
 module.exports = class AnalyticsController extends Controller
     initialize: ->
