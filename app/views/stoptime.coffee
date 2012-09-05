@@ -10,4 +10,5 @@ module.exports = class StopTime extends View
     getTemplateData: ->
         data = @model.toJSON()
         data.times = _(data.times).first(4)
+        data.moreTimes = (@model.get 'times').length > 4
         data

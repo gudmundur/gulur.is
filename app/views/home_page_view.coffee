@@ -16,7 +16,7 @@ module.exports = class HomePageView extends PageView
         mediator.location.done (location) ->
             stops = new Stops
 
-            data = (_.defaults location.toJSON(), range: 'now')
+            data = _.defaults location.toJSON(), range: 'restOfDay'
             (stops.fetch data: data).done =>
                 new StopsView
                     collection: stops
