@@ -16,11 +16,18 @@ module.exports = class LocationController extends Controller
             mediator.location.reject new Error 'No geolocation support'
 
     success: (position) =>
+        { latitude, longitude, accuracy } = position.coords
+        { timestamp } = position.timestamp
+
+        if latitude is 64.13533799999999 and longitude is -21.89521
+            mediator.location.reject new Error 'Default ip location'
+            return
+
         @model.set
-            latitude: position.coords.latitude
-            longitude: position.coords.longitude
-            accuracy: position.coords.accuracy
-            timestamp: position.timestamp
+            latitude: latitude
+            longitude: longitude
+            accuracy: accuracy
+            timestamp: timestamp
         
         mediator.location.resolve @model
         mediator.publish 'location', @model
