@@ -21,7 +21,10 @@ exports.config =
         'stylesheets/app.css': /^(app|vendor)/
         'test/stylesheets/test.css': /^test/
       order:
-        before: ['vendor/styles/normalize-1.0.0.css']
+        before: [
+          'vendor/styles/bootstrap.min.css',
+          'vendor/styles/bootstrap-responsize.min.css'
+        ]
         after: ['vendor/styles/helpers.css']
 
     templates:

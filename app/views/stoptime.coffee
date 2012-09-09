@@ -5,7 +5,7 @@ template = require 'views/templates/stoptime'
 module.exports = class StopTime extends View
     template: template
     tagName: 'li'
-    className: 'row-fluid'
+    className: 'clearfix'
 
     getTemplateData: ->
         data = @model.toJSON()

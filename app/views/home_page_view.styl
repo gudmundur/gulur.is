@@ -1,11 +1,8 @@
 #stops
     ul
-        margin: 0
-        padding: 0
+        margin-left: 0
 
     li
-        margin: 0
-        padding: 0
         list-style: none
 
 
@@ -13,24 +10,27 @@
         li
             display: inline
 
-.fallback
-    display: none
+    /* Landscape phone to portrait tablet */
+    @media (max-width: 767px)
+        .routeinfo
+            display: inline
+            float: left
+            width: 30%
 
-.js #js-required
-    visibility: hidden
-    display: none
+        .times
+            display: inline
+            float: left
+            width: 70%
 
-.no-js #js-required
-    visibility: visible
 
-footer
-    padding-top: 2em
-    padding-bottom: 1em
+    /* Landscape phones and down */
+    @media (max-width: 480px)
+        .routeinfo
+            display: inline
+            width: auto
 
-.footer-links
-    margin: 0
-    padding: 0
-
-    li
-        display: inline
-        margin-right: 2em
+        .times
+            display: inline
+            float: right
+            width: auto
+            font-size: 10px
