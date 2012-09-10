@@ -15,4 +15,4 @@ module.exports = class Stops extends Collection
         st.fetch(options).done =>
             stops = st.chain().map((s) -> (s.get 'stop').longName).uniq().value()
             byStop = st.groupBy (s) -> (s.get 'stop').longName
-            @reset stops.map (s) -> stopTimes: (new StopTimes byStop[s]).sort()
+            @reset stops.map (s) -> stopTimes: (new StopTimes byStop[s])
