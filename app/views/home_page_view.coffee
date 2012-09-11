@@ -16,11 +16,18 @@ module.exports = class HomePageView extends PageView
         mediator.location.done (location) ->
             stops = new Stops
 
-            data = _.defaults location.toJSON(), range: 'restOfDay'
-            (stops.fetch data: data).done =>
-                new StopsView
-                    collection: stops
-                    container: $ '#stops'
+            data = _.defaults location.toJSON(), range: 'restOfDay', radius: 750
+            (stops.fetch data: data)
+                .done =>
+                    _gaq.push ['_trackEvent', 'ajax_success', 'stop_count', stops.length]
+
+                    new StopsView
+                        collection: stops
+                        container: $ '#stops'
+                .fail =>
+                    _gaq.push ['_trackEvent', 'ajax_failure']
+                    Backbone.history.navigate 'lost', trigger: true
 
         mediator.location.fail (error) ->
+            _gaq.push ['_trackEvent', 'location_failure']
             Backbone.history.navigate 'lost', trigger: true
