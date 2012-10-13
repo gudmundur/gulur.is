@@ -7,8 +7,6 @@ Layout = require 'views/layout'
 AnalyticsController = require 'controllers/analytics_controller'
 LocationController = require 'controllers/location_controller'
 
-FooterController = require 'controllers/footer_controller'
-
 module.exports = class Application extends Chaplin.Application
   # Set your application name here so the document title is set to
   # “Controller title – Site title” (see Layout#adjustTitle)
@@ -54,8 +52,6 @@ module.exports = class Application extends Chaplin.Application
     # e.g. new NavigationController()
     new AnalyticsController
     new LocationController
-
-    new FooterController
 
   # Create additional mediator properties
   # -------------------------------------
