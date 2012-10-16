@@ -8,16 +8,30 @@
 .no-js #js-required
     visibility: visible
 
-body
-    padding-top: 40px
-    padding-bottom: 5em
+html, body
+    height: 100%
+
+#wrap
+    min-height: 100%
+
+@media (min-width: 979px)
+    #page-container
+        padding-top: 40px
+
+#main
+    overflow: auto
+    padding-bottom: 80px
 
 footer
-    width: 100%
+    position: relative
+    margin-top: -80px
+    height: 20px
+    clear: both
+    padding: 30px 0
 
+    width: 100%
     background-color: whiteSmoke
     border-top: 1px solid #ddd
-    padding: 2em 0
 
 .footer-links
     margin: 0
