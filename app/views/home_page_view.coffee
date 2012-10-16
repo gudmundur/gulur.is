@@ -13,6 +13,8 @@ module.exports = class HomePageView extends PageView
     initialize: ->
         super
 
+        _gaq = window._gaq
+
         mediator.location.done (location) ->
             stops = new Stops
 
@@ -26,7 +28,7 @@ module.exports = class HomePageView extends PageView
                         container: $ '#stops'
                 .fail =>
                     _gaq.push ['_trackEvent', 'ajax_failure']
-                    Backbone.history.navigate 'lost', trigger: true
+                    Backbone.history.navigate 'error', trigger: true
 
         mediator.location.fail (error) ->
             _gaq.push ['_trackEvent', 'location_failure']
