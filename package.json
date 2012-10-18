@@ -1,12 +1,12 @@
 {
-  "author": "Your Name",
-  "name": "package-name",
-  "description": "Package description",
-  "version": "0.0.1",
-  "homepage": "",
+  "author": "Guðmundur Bjarni Ólafsson",
+  "name": "gulur.is",
+  "description": "An unofficial Html5 based client for showing the bus times in and around Reykjavík.",
+  "version": "1.0.0",
+  "homepage": "http://gulur.is",
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/gudmundur/gulur.is.git"
   },
   "engines": {
     "node": "~0.6.10 || 0.8 || 0.9"
