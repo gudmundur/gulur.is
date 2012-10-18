@@ -8,8 +8,41 @@
 .no-js #js-required
     visibility: visible
 
+header = #5F6A4A
+brand = #E4C74F
+
+body = #FCFBE3
+textcolor = #504332
+smallcolor = #504332
+linkcolor = #5A86B0
+
+footer = #718351
+footertext = #E4C74F
+
 html, body
     height: 100%
+    background: body !important
+    color: textcolor !important
+
+h1 small, h2 small, h3 small, h4 small
+    color: smallcolor !important
+
+#wrap a
+    color: linkcolor !important
+    text-decoration: underline !important
+
+.navbar-inner
+    background: header !important
+
+.brand
+    color: brand !important
+    font-weight: bold !important
+
+footer
+    background: footer !important
+
+footer a
+    color: footertext !important
 
 #wrap
     min-height: 100%
@@ -37,8 +70,9 @@ footer
     clear: both
     padding: 30px 0
 
-    background-color: whiteSmoke
-    border-top: 1px solid #ddd
+    xborder-top: 1px solid #6A4A3C
+    box-shadow: inset 0px 1px 0px rgba(0, 0, 0, 0.1), 0px 1px 0px rgba(0, 0, 0, 0.1)
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25)
 
 .footer-links
     margin: 0
