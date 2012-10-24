@@ -1,83 +1,87 @@
 .fallback
-    display: none
+  display: none
 
 .js #js-required
-    visibility: hidden
-    display: none
+  visibility: hidden
+  display: none
 
 .no-js #js-required
-    visibility: visible
+  visibility: visible
 
-header = #5F6A4A
-brand = #E4C74F
+header = #ffea00
+brand = black
 
-body = #FCFBE3
-textcolor = #504332
-smallcolor = #504332
-linkcolor = #5A86B0
+body = white
+textcolor = black
+smallcolor = black
+linkcolor = black
 
-footer = #718351
-footertext = #E4C74F
+footer = #ffea00
+footertext = black
 
 html, body
-    height: 100%
-    background: body !important
-    color: textcolor !important
+  height: 100%
+  background: body !important
+  color: textcolor !important
 
 h1 small, h2 small, h3 small, h4 small
-    color: smallcolor !important
+  color: smallcolor !important
 
 #wrap a
-    color: linkcolor !important
-    text-decoration: underline !important
+  color: linkcolor !important
+  text-decoration: underline !important
 
 .navbar-inner
-    background: header !important
+  background: header !important
+
+.navbar
+  .brand
+    text-shadow: 0 -1px 0 rgba(255, 255, 255, 0.5)
 
 .brand
-    color: brand !important
-    font-weight: bold !important
+  color: brand !important
+  font-weight: bold !important
 
 footer
-    background: footer !important
+  background: footer !important
 
 footer a
-    color: footertext !important
+  color: footertext !important
 
 #wrap
-    min-height: 100%
+  min-height: 100%
 
 @media (min-width: 979px)
-    #page-container
-        padding-top: 40px
+  #page-container
+    padding-top: 40px
 
 @media (max-width: 979px)
-    footer
-        margin-left: -20px;
-        margin-right: -20px;
-        padding-left: 20px;
-        padding-right: 20px;
+  footer
+    margin-left: -20px;
+    margin-right: -20px;
+    padding-left: 20px;
+    padding-right: 20px;
 
 
 #main
-    overflow: auto
-    padding-bottom: 80px
+  overflow: auto
+  padding-bottom: 80px
 
 footer
-    position: relative
-    margin-top: -80px
-    height: 20px
-    clear: both
-    padding: 30px 0
+  position: relative
+  margin-top: -80px
+  height: 20px
+  clear: both
+  padding: 30px 0
 
-    xborder-top: 1px solid #6A4A3C
-    box-shadow: inset 0px 1px 0px rgba(0, 0, 0, 0.1), 0px 1px 0px rgba(0, 0, 0, 0.1)
-    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25)
+  xborder-top: 1px solid black
+  box-shadow: inset 0px 1px 0px rgba(0, 0, 0, 0.1), 0px 1px 0px rgba(0, 0, 0, 0.1)
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25)
 
 .footer-links
-    margin: 0
-    padding: 0
+  margin: 0
+  padding: 0
 
-    li
-        display: inline
-        margin-right: 2em
+  li
+    display: inline
+    margin-right: 2em
