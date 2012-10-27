@@ -10,4 +10,3 @@ module.exports = class StopsView extends CollectionView
     tagName: 'div'
     listSelector: 'ul'
     animationDuration: 0
-    fallbackSelector: '.fallback'

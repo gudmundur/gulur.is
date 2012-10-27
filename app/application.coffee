@@ -8,8 +8,6 @@ AnalyticsController = require 'controllers/analytics_controller'
 LocationController = require 'controllers/location_controller'
 
 module.exports = class Application extends Chaplin.Application
-  # Set your application name here so the document title is set to
-  # “Controller title – Site title” (see Layout#adjustTitle)
   title: 'Gulur.is'
 
   initialize: ->
@@ -59,4 +57,5 @@ module.exports = class Application extends Chaplin.Application
     # Add additional application-specific properties and methods
     # Seal the mediator
     mediator.location = null
+    mediator.geolocation = null
     Chaplin.mediator.seal()

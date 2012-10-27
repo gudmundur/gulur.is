@@ -1,4 +1,4 @@
-.fallback
+.fallback, .loading
   display: none
 
 .js #js-required
@@ -22,47 +22,48 @@ footertext = black
 
 html, body
   height: 100%
-  background: body !important
-  color: textcolor !important
+  background: body
+  color: textcolor
 
 h1 small, h2 small, h3 small, h4 small
-  color: smallcolor !important
+  color: smallcolor
 
 #wrap a
-  color: linkcolor !important
-  text-decoration: underline !important
+  color: linkcolor
+  text-decoration: underline
 
-.navbar-inner
-  background: header !important
-  border-width: 0 !important
+.navbar-inverse .navbar-inner
+  background: header
+  border-width: 0
 
 .navbar
   .brand
     text-shadow: 0 -1px 0 rgba(255, 255, 255, 0.5)
-
-.brand
-  color: brand !important
-  font-weight: bold !important
+    color: brand
+    font-weight: bold
 
 footer
-  background: footer !important
+  background: footer
 
 footer a
-  color: footertext !important
+  color: footertext
 
 #wrap
   min-height: 100%
 
 @media (min-width: 979px)
   #page-container
-    padding-top: 40px
+    padding-top: 60px
 
 @media (max-width: 979px)
   footer
-    margin-left: -20px;
-    margin-right: -20px;
-    padding-left: 20px;
-    padding-right: 20px;
+    margin-left: -20px
+    margin-right: -20px
+    padding-left: 20px
+    padding-right: 20px
+
+    .container
+      padding: 0 20px
 
 
 #main

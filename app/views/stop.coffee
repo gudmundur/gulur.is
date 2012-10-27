@@ -12,8 +12,7 @@ module.exports = class StopView extends View
     initialize: ->
         super
 
-        mediator.location.done (location) =>
-            @location = location
+        @location = mediator.location
 
     getTemplateData: ->
         distance = geolib.getDistance { latitude: (@location.get 'latitude'), longitude: (@location.get 'longitude') }, @model.coordinates()
