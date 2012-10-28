@@ -73,6 +73,8 @@ module.exports = class HomePageView extends PageView
 
         @location.clear silent: true
         @location.set
+            stopName: name
+            stopId: stop.get 'stopId'
             latitude: (stop.get 'location')[0]
             longitude: (stop.get 'location')[1]
 
