@@ -46,11 +46,15 @@ module.exports = class HomePageView extends PageView
         @stops.reset()
         data = _.defaults @location.toJSON(), range: 'restOfDay', radius: 750
 
+        _gaq.push ['_trackEvent', 'ajax', 'fetch', 'start']
+
         (@stops.fetch data: data)
             .done =>
+                _gaq.push ['_trackEvent', 'ajax', 'fetch', 'done', @stops.length]
                 (@$ '.loading').hide()
             
             .fail ->
+                _gaq.push ['_trackEvent', 'ajax', 'fetch', 'fail', @stops.length]
                 Backbone.history.navigate 'error', trigger: true
 
     getTemplateData: ->
@@ -65,9 +69,7 @@ module.exports = class HomePageView extends PageView
 
     pickStopByName: (name) =>
         stop = @allStops.find (s) -> (s.get 'longName') is name
-        console.log stop
         return unless stop
-
 
         @location.clear silent: true
         @location.set
