@@ -29,6 +29,8 @@ module.exports = class HomePageView extends PageView
         @location = mediator.location
         @location.on 'change', @fetch
 
+        @placeholderLabel = Modernizr.geolocation
+
         @fetch()
 
         @allStops = new AllStops
@@ -37,8 +39,12 @@ module.exports = class HomePageView extends PageView
 
         @allStops.fetch()
 
+    updatePlaceholder: =>
+        @placeholderLabel = if (@location.get 'geo') is true then 'Núverandi stað' else 'Sláðu inn biðstöð'
+        (@$ '#search_from').attr 'placeholder', @placeholderLabel
+
     fetch: =>
-        (@$ '#search_from').attr 'placeholder', if @location.get 'geo' then 'Núverandi stað' else 'Sláðu inn biðstöð'
+        @updatePlaceholder()
 
         return unless @location.has 'latitude'
 
@@ -54,11 +60,11 @@ module.exports = class HomePageView extends PageView
                 (@$ '.loading').hide()
             
             .fail ->
-                _gaq.push ['_trackEvent', 'ajax', 'fetch', 'fail', @stops.length]
+                _gaq.push ['_trackEvent', 'ajax', 'fetch', 'fail'] # Never sent because of redirect
                 Backbone.history.navigate 'error', trigger: true
 
     getTemplateData: ->
-        fromPlaceholder: if Modernizr.geolocation then 'Núverandi stað' else 'Sláðu inn biðstöð'
+        fromPlaceholder: @placeholderLabel
 
     renderSubviews: ->
         super

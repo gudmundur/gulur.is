@@ -5,8 +5,8 @@ mediator = require 'mediator'
 
 module.exports = class LocationController extends Controller
     initialize: ->
-        mediator.geolocation = @model = new Location geo: Modernizr.geolocation
-        mediator.location = new Location geo: Modernizr.geolocation
+        mediator.geolocation = @model = new Location
+        mediator.location = new Location
 
         if Modernizr.geolocation
             _gaq.push ['_trackEvent', 'geo', 'available', 'yes']
@@ -41,5 +41,4 @@ module.exports = class LocationController extends Controller
 
     failure: (error) =>
         _gaq.push ['_trackEvent', 'geo', 'allowed', 'no']
-
         @model.set geo: false
